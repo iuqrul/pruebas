@@ -1,0 +1,31 @@
+{
+  "name": "tvhoradada",
+  "version": "0.0.0",
+  "authors": [
+    "José Sánchez Moreno <jose@o2w.es>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "~1.2.9",
+    "angular": "~1.2.9",
+    "bootstrap": "~3.0.3",
+    "jquery": "1",
+    "restangular": "~1.2.2",
+    "lodash": "~2.4.1",
+    "angular-flash": "~0.1.12",
+    "angularjs-i18n": "*",
+    "angular_animate.css": "*"
+  },
+  "resolutions": {
+    "angular": "~1.2.13",
+    "jquery": "1"
+  }
+}

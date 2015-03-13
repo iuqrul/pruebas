@@ -1,0 +1,74 @@
+<h1>Mis datos</h1>
+<p class="well">Si desea cambiar sus datos puede corregir cualquier información que no sea correcta en este formulario y pulsar sobre el botón enviar</p>
+
+<form class="form-horizontal" name="commentform" ng-submit="enviar()">
+
+    <div class="form-group">
+        <label class="control-label col-md-4" for="nombre">Nombre</label>
+        <div class="col-md-6">
+            <input type="text" class="form-control" name="nombre"  placeholder="Nombre" ng-required="true" ng-model="cliente.nombre"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4" for="direccion">Dirección</label>
+        <div class="col-md-6">
+            <input type="text" class="form-control" name="direccion"  placeholder="Dirección" ng-required="true" ng-model="cliente.direccion"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4" for="postal">Código postal</label>
+        <div class="col-md-2">
+            <input type="text" class="form-control" name="postal"  placeholder="Código postal" ng-required="true" ng-model="cliente.postal"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-4" for="poblacion">Población</label>
+        <div class="col-md-6">
+            <input type="text" class="form-control" name="poblacion"  placeholder="Población" ng-required="true" ng-model="cliente.poblacion"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-4" for="provincia">Provincia</label>
+        <div class="col-md-6">
+            <input type="text" class="form-control" name="provincia"  placeholder="Provincia" ng-required="true" ng-model="cliente.provincia"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-4" for="nif">Nif</label>
+        <div class="col-md-6">
+            <input type="text" class="form-control" name="nif"  placeholder="Nif" ng-required="true" ng-model="cliente.nif"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4" for="email">Email</label>
+        <div class="col-md-4">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email" ng-required="true" ng-model="cliente.email"/>
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="form-group col-md-offset-6">
+            <label class="control-label col-md-4" for="usuario">Usuario</label>
+            <div class="col-md-2">
+                <input type="text" class="form-control" name="usuario"  placeholder="Usuario" ng-required="true" ng-model="cliente.usuario"/>
+            </div>
+
+            <label class="control-label col-md-1" for="clave">Clave</label>
+            <div class="col-md-2">
+                <input type="text" class="form-control" name="clave"  placeholder="Contraseña" ng-required="true" ng-model="cliente.clave"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <button type="submit" value="Submit" class="btn btn-primary pull-right">Enviar</button>
+        </div>
+    </div>
+
+</form>

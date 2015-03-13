@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="tutorialApp" ng-controller="ControlListaTelefonos">
+    <head>
+        <title ng-bind-template="AngularJS Tutorial 4">AngularJS Tutorial 4</title>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="js/libs/angular.js/angular.js"></script>
+        <script type="text/javascript" src="js/ControlListaTelefonos.js"></script>
+    </head>
+    <body>
+        Búsqueda: <input ng-model="busqueda">
+        Ordenar por:
+        <select ng-model="orderProp">
+            <option value="nombre">Alfab&eacute;tico</option>
+            <option value="edad">Más reciente</option>
+            <option value="-edad">Más antiguo</option>
+        </select>
+        <ul class="telefonos">
+            <li ng-repeat="telefono in telefonos| filter:busqueda | orderBy:orderProp">
+                {{telefono.nombre}}
+                <p>{{telefono.descripcion}}</p>
+            </li>
+        </ul>
+        {{orderProp}}
+    </body>
+</html>

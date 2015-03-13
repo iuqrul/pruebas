@@ -1,0 +1,19 @@
+{
+  "name": "angularjs-i18n",
+  "main": "./scripts/i18nAdapter.js",
+  "dependencies": {
+    "jquery": "2.0.0",
+    "underscore": "1.4.4",
+    "angular": "1.0.6"
+  },
+  "homepage": "https://github.com/ridertahiti/angularjs-i18n",
+  "_release": "5fb4c3fc95",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "5fb4c3fc95bc2b45f0c707c4fb7c83376a1c741e"
+  },
+  "_source": "git://github.com/ridertahiti/angularjs-i18n.git",
+  "_target": "*",
+  "_originalSource": "angularjs-i18n"
+}

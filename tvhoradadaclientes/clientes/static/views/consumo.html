@@ -1,0 +1,82 @@
+<h1>Mis consumos</h1>
+
+<form class="form-horizontal form-inline" name="commentform" ng-submit="enviar()">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-5">
+                <h4 class="pull-right">Listado de los consumos no facturados</h4>
+            </div>
+            <div class="col-md-4">
+                <div class="pull-right">
+                    <select class="form-control" ng-model="telefono"
+                            ng-options="telefono for telefono in telefonos">
+                    </select class="form-control">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" ng-model="buscar">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                </div><!-- /input-group -->
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="table-responsive">
+
+    <div class="col-centered" ng-show="numPages > 1">
+        <pagination direction-links="false"
+                    total-items="totalItems"
+                    page="currentPage"
+                    max-size="maxSize"
+                    on-select-page="setPage(page)"
+                    items-per-page="pageSize"
+                    num-pages="numPages">
+        </pagination>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Tipo</th>
+                <th>Origen</th>
+                <th>Destino</th>
+                <th>Neto</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="consumo in consumos_paginados|limitTo:10" class="consumos">
+                <td>{{ consumo.Fecha|date }}</td>
+                <td>{{ consumo.Hora }}</td>
+                <td>{{ getTipo(consumo.TipoLlamada) }} {{ consumo.Destino }}</td>
+                <td class="numero">{{ consumo.TelOrigen }}</td>
+                <td  class="numero">{{ consumo.TelDestino }}</td>
+                <td  class="numero">{{ consumo.ImpBruto|number }}€</td>
+                <td  class="numero text-primary">
+                    {{ consumo.ImpNeto|number }}€
+                </td>
+
+            </tr>
+        </tbody>
+
+    </table>
+    <div class="col-centered" ng-show="numPages > 1">
+        <pagination direction-links="false"
+                    total-items="totalItems"
+                    page="currentPage"
+                    max-size="maxSize"
+                    on-select-page="setPage(page)"
+                    items-per-page="pageSize"
+                    num-pages="numPages2">
+        </pagination>
+    </div>
+</div>

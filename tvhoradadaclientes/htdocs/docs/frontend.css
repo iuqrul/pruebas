@@ -1,0 +1,12 @@
+body {
+    background: url('fondo.jpg');
+    background-size: 100%;
+    background-color: red;
+}
+
+.org-src-container {
+    background: #333;
+}
+pre.src {
+    font-size: 0.65em;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="es" ng-app="tutorialApp" ng-controller="ControlListaTelefonos">
+    <head>
+        <title ng-bind-template="AngularJS Tutorial 3 - Galer&iacute;a de tel&eacute;fonos de Google: {{query}}">AngularJS Tutorial 3</title>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="js/libs/angular.js/angular.js"></script>
+        <script type="text/javascript" src="js/ControlListaTelefonos.js"></script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span2">
+                    <!--Sidebar content-->
+
+                    B&uacute;squeda: <input ng-model="query">
+
+                </div>
+                <div class="span10">
+                    <!--Body content-->
+
+                    <ul class="telefonos">
+                        <li ng-repeat="telefono in telefonos| filter:query">
+                            {{telefono.nombre}}
+                            <p>{{telefono.descripcion}}</p>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>        
+    </body>
+</html>

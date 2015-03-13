@@ -1,0 +1,98 @@
+<h1>Mis facturas</h1>
+
+<form class="form-horizontal form-inline" name="commentform" ng-submit="enviar()">
+    <div class="well">
+        <div class="row">
+            <div class="form-group col-md-9">
+
+                <h4 class="pull-right">Seleccione el periodo que desea para ver las facturas</h4>
+            </div>
+            <div class="col-md-3">
+                <div class="pull-right">
+                    <select class="form-control" ng-model="year"
+                            ng-change="reset_detalle()"
+                            ng-options="year for year in years">
+                    </select class="form-control">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Ejercicio</th>
+                <th>Mes</th>
+                <th>Factura</th>
+                <th>Base</th>
+                <th>IVA</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="factura in facturas|filter:filtrado" class="facturas">
+                <td>{{ factura.Ejercicio }}</td>
+                <td>{{ factura.Mes }}</td>
+                <td class="numero">{{ factura.Serie }}/{{ Entero(factura.Factura) }}</td>
+                <td  class="numero">{{ factura.BaseImponible|number }}€</td>
+                <td  class="numero">{{ factura.TotalIVA|number }}€</td>
+                <td  class="numero text-primary">
+                    {{ factura.TotalFactura|number }}€
+                </td>
+                <td class="numero">
+                    <button class="btn btn-xs btn-info" ng-click="detalles(factura)">Ver detalles</button>
+                    <button class="btn btn-xs btn-primary" ng-click="descargar(factura)">
+                        <span class="glyphicon glyphicon-save"></span>
+                        Descargar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+
+
+<script type="text/ng-template" id="detalle_factura.html">
+    <div class="modal-header">
+        <h4>Detalle de la factura {{ factura.Serie}}/{{ Entero(factura.Factura) }} </h4>
+    </div>
+    <div class="modal-body">
+        <div class="table-responsive" ng-show="lineasFactura">
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Producto</th>
+                        <th>Descripción</th>
+                        <th>Unidades</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat="linea in lineasFactura">
+                        <td>{{ linea.Tipo }}</td>
+                        <td>{{ linea.Producto }}</td>
+                        <td class="numero">{{ linea.Descripcion }}</td>
+                        <td  class="numero">{{ linea.Unidades|number }}</td>
+                        <td  class="numero">{{ linea.Base|number }}€</td>
+                        <td  class="numero text-primary">
+                            {{ linea.Unidades * linea.Base|number }}€
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="close()">Cerrar</button>
+    </div>
+</script>

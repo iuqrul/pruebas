@@ -1,0 +1,38 @@
+{% extends '_base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="header">
+            <ul class="nav nav-pills pull-right">
+                <li class="active"><a href="/logout">Salir</a></li>
+            </ul>
+
+            <h3 class="logo">
+                <a href="./" class="logo"><img src="{{ STATIC_URL }}images/logo_horizontal.jpg" /></a>
+            </h3>
+        </div>
+        <div>
+            <ng-include src="'/static/views/ui/menu.html'"></ng-include>
+
+            {% verbatim %}
+            <div flash-alert active-class="in" class="alert fade">
+                <button type="button" class="close" ng-click="hide()">&times;</button>
+                <strong class="alert-heading">Atención</strong>
+                <span class="alert-message"> {{flash.message}} </span>
+            </div>
+            {% endverbatim %}
+
+            <div ui-view
+                 autoscroll='false'></div>
+
+            <div class="footer">
+                <p>&copy; TvHoradada 2014</p>
+            </div>
+
+        </div>
+
+        <script>
+            var tpl_root = '/static/views/';
+        </script>
+{% endblock %}

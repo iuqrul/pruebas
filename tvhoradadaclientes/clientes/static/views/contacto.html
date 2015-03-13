@@ -1,0 +1,37 @@
+<h1>Formulario de contacto</h1>
+<p class="well">Si desea contactar con nosotros por favor rellene este formulario con sus datos y la consulta y nos pondremos en contacto con usted lo antes posible.</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>contacta con nosotros</h3>
+            <hr>
+                <address>
+                    <strong>Email:</strong> <a href="mailto:info@tvhoradada.com"> info@tvhoradada.com</a>
+                    <br/><br/>
+                    <strong>Teléfono:</strong> 902 00 63 73
+                </address>
+        </div>
+
+        <div class="col-sm-8 contact-form">
+            <form id="contact" class="form" role="form" ng-submit="submit()">
+                <div class="row">
+                    <div class="col-xs-6 col-md-6 form-group">
+                        <input class="form-control" ng-model="contacto.nombre" name="name" placeholder="Nombre y apellidos" type="text" required autofocus />
+                    </div>
+                    <div class="col-xs-6 col-md-6 form-group">
+                        <input class="form-control" ng-model="contacto.email" name="email" placeholder="Email" type="email" required />
+                    </div>
+                </div>
+                <textarea class="form-control" ng-model="contacto.texto" name="message" placeholder="Texto a enviar" rows="5"></textarea>
+                <br />
+                <div class="row">
+                    <div class="col-xs-12 col-md-12 form-group">
+                        <button class="btn btn-primary pull-right" type="submit">Enviar</button>
+                    </div>
+            </form>
+            </div>
+
+        </div>
+    </div>
+</div>

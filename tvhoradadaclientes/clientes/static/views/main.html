@@ -1,0 +1,23 @@
+
+
+
+<h1>{{ texto }}</h1>
+
+
+
+
+<table class="table table-striped">
+    <tr>
+        <th>Nombre</th>
+        <th>Provincia</th>
+        <th>Dirección</th>
+		<th>Población</th>
+    </tr>
+
+    <tr ng-repeat="cliente in clientes">
+        <td>{{ cliente.titular }}</td>
+        <td>{{ cliente.provincia }}</td>
+        <td>{{ cliente.direccion }}</td>
+		<td>{{ cliente.poblacion }}</td>
+    </tr>
+</table>

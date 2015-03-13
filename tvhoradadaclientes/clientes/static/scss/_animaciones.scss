@@ -1,0 +1,26 @@
+@mixin animation ($string) {
+    -webkit-animation: $string;
+    -moz-animation: $string;
+    -ms-animation: $string;
+    animation: $string;
+}
+
+
+[ui-view].ng-enter {
+
+    @include animation(fade-in 0.5s);
+}
+
+[ui-view].ng-leave {
+    display: none;
+    @include animation(fade-out 0.1s);
+}
+
+.consumos.ng-enter, .facturas.ng-enter {
+    @include animation(fade-in 0.2s);
+}
+
+.consumos.ng-leave, .facturas.ng-leave {
+    display: none;
+    @include animation(fade-out 0.1s);
+}

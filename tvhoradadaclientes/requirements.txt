@@ -1,0 +1,23 @@
+django==1.6.2
+raven
+django-pipeline
+django-extensions
+requests
+django-bootstrap3
+django-braces
+djangorestframework==2.3.12
+djangocms-admin-style
+django-admin-import
+xlrd
+#pyodbc
+#django-pyodbc
+#mysql-python
+south
+
+# apt-get install freetds-dev
+pymssql
+
+django-debug-toolbar
+
+django-cors-headers
+unidecode

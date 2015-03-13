@@ -1,0 +1,35 @@
+{
+  "name": "angular_animate.css",
+  "authors": [
+    "Mohamed <m.abdelatty@me.com>"
+  ],
+  "description": "animate.css animations for AngularJS",
+  "main": "animations.css",
+  "keywords": [
+    "angularjs",
+    "animate.css"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "animate.scss": "*"
+  },
+  "homepage": "https://github.com/magnifi/angular-animate.css",
+  "_release": "9a4594aae5",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "9a4594aae560ac2ab34e53c75bfbeffddaddaba0"
+  },
+  "_source": "git://github.com/magnifi/angular-animate.css.git",
+  "_target": "*",
+  "_originalSource": "angular_animate.css",
+  "_direct": true
+}

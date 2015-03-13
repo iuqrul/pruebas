@@ -1,0 +1,17 @@
+*~
+htdocs/cached/*
+htdocs/media/*
+htdocs/imgs/*
+htdocs/resources
+*.pyc
+docs/*
+log/*
+.sass-cache/
+files/
+/lib/*
+resources/
+local_settings.py
+local/
+bin/
+TAGS
+include

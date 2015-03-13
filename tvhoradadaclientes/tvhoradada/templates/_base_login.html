@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load compressed %}
+{% load bootstrap3 %}
+<html>
+
+    <head>
+        <title>
+            Área de clientes - TvHoradada
+        </title>
+        {% compressed_css "main" %}
+        {% bootstrap_css %}
+        <link href="{{ STATIC_URL }}css/main.css" rel="stylesheet" media="screen">
+
+            <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    </head>
+    <body>
+
+        {% block content %}{% endblock %}
+
+
+        <script src="{{ STATIC_URL }}bower_components/jquery/jquery.js"></script>
+        <script src="{{ STATIC_URL }}bower_components/angular/angular.js"></script>
+        <script src="{{ STATIC_URL }}bower_components/angular-route/angular-route.js"></script>
+
+        <script src="{{ STATIC_URL }}js/app.js"></script>
+        <script src="{{ STATIC_URL }}js/controllers/main.js"></script>
+
+        {% bootstrap_javascript %}
+    </body>
+</html>

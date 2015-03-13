@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>(Programación Frontend en JavaScript)</title>
+<meta name="author" content="(José Sánchez Moreno)"/>
+<link rel="stylesheet" href="./reveal.js/css/reveal.min.css"/>
+<link rel="stylesheet" href="./reveal.js/css/theme/night.css" id="theme"/>
+<link rel="stylesheet" href="frontend.css"/>
+<link rel="stylesheet" href="./reveal.js/css/print/pdf.css" type="text/css" media="print"/>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section>
+<h1>Programación Frontend en JavaScript</h1>
+<h2>José Sánchez Moreno</h2>
+<h2><a href="mailto:jose@o2w.es">jose@o2w.es</a></h2>
+<h2></h2></section>
+
+<section>
+<section id="sec-1" >
+
+<h2>Iniciación al desarrollo de frontends en javascript</h2>
+<ul class="org-ul">
+<li>Básicamente veremos como desarrollar en javascript usando como backend para los datos servidores REST.
+</li>
+</ul>
+</section>
+
+</section>
+<section>
+<section id="sec-2" >
+
+<h2>Herramientas que usaremos</h2>
+<ul class="org-ul">
+<li class="fragment roll-in"><b><b>Git</b></b> para el control de código
+</li>
+<li class="fragment roll-in"><b><b>Sass</b></b> para la generación de estilos css
+</li>
+<li class="fragment roll-in"><b><b>Python / Django</b></b> para la creación del servidor rest
+</li>
+<li class="fragment roll-in"><b><b>AngularJS</b></b> como plataforma de desarrollo javascript
+</li>
+</ul>
+</section>
+
+
+
+</section>
+<section>
+<section id="sec-3" >
+
+<h2>Git: Gitlab</h2>
+<ul class="org-ul">
+<li>La encontraremos en <a href="https://git.o2w.es">https://git.o2w.es</a>
+</li>
+<li>Lo básico:
+</li>
+<li>Descargamos el código con "git pull"
+</li>
+<li>Modificamos lo que queramos y después
+</li>
+<li>Realizamos un commit "git commit -am 'Descripción de los cambios'"
+</li>
+<li>Subimos los cambios con "git push"
+</li>
+</ul>
+
+</section>
+<section id="sec-3-1" >
+
+<h3>Interfaz de colaboración</h3>
+<img src="./gitlab.png" alt="gitlab.png" />
+</section>
+
+</section>
+<section>
+<section id="sec-4" >
+
+<h2>Sass</h2>
+<ul class="org-ul">
+<li>Es un metalenguage sobre css que nos permite generar código css de manera más eficiente, fácil y ponente.
+</li>
+<li>Usaremos compass específicamente sobre sass
+</li>
+</ul>
+</section>
+<section id="sec-4-1" >
+
+<h3>Código sass</h3>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #93E0E3;">.navbar .container-fluid.main-nav .nav-collapse .nav.menubar </span>{
+<span style="color: #93E0E3;">    p </span>{
+<span style="color: #93E0E3;">        </span><span style="color: #DCDCCC; font-weight: bold;">@include</span><span style="color: #93E0E3;"> respond-to(mobile) </span>{
+            <span style="color: #DFAF8F;">display</span>: inline-block;
+        }
+    }
+
+}
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>El Resultado "transpilado"
+</li>
+</ul>
+
+
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #DCDCCC; font-weight: bold;">@media</span> only screen and (max-width: 640px) {
+<span style="color: #93E0E3;">  </span><span style="color: #5F7F5F;">/* </span><span style="color: #7F9F7F;">line 38, ../scss/dondeestamigrua.scss </span><span style="color: #5F7F5F;">*/</span>
+<span style="color: #93E0E3;">  .navbar .container-fluid.main-nav .nav-collapse .nav.menubar p </span>{
+    <span style="color: #DFAF8F;">display</span>: inline-block;
+  }
+}
+</pre>
+</div>
+</section>
+
+</section>
+<section>
+<section id="sec-5" >
+
+<h2>Python y django</h2>
+<ul class="org-ul">
+<li>Django nos permite crear servidores REST de manera muy rápida, potente y sencilla.
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">class</span> <span style="color: #7CB8BB;">FacturasViewSet</span>(viewsets.GenericViewSet):
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">retrieve</span>(<span style="color: #F0DFAF; font-weight: bold;">self</span>, request, pk=<span style="color: #BFEBBF;">None</span>):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">result</span> = Tvh().get_factura(pk)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> Response(result)
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #7CB8BB;">@link</span>()
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">lineas</span>(<span style="color: #F0DFAF; font-weight: bold;">self</span>, request, pk=<span style="color: #BFEBBF;">None</span>):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">result</span> = Tvh().get_lineas_de_factura(pk)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> Response(result)
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #7CB8BB;">@link</span>()
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">consumos</span>(<span style="color: #F0DFAF; font-weight: bold;">self</span>, request, pk=<span style="color: #BFEBBF;">None</span>):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">result</span> = Tvh().get_consumos_de_factura(pk)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> Response(result)
+
+
+  <span style="color: #F0DFAF; font-weight: bold;">class</span> <span style="color: #7CB8BB;">StockalmViewSet</span>(BaseView):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>    <span style="color: #DFAF8F;">model</span> = models.Stockalm
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>    <span style="color: #DFAF8F;">serializer_class</span> = serializers.StockalmSerializer
+</pre>
+</div>
+
+</section>
+<section id="sec-5-1" >
+
+<h3>API</h3>
+<img src="./api.png" alt="api.png" />
+</section>
+
+</section>
+<section>
+<section id="sec-6" >
+
+<h2>Rest</h2>
+<ul class="org-ul">
+<li class="fragment roll-in">Nos permite interactuar con los modelos de datos
+</li>
+<li class="fragment roll-in">Descentralizado: los datos pueden estar en varios servidores
+</li>
+<li class="fragment roll-in">Sencillo: basado en javascript (en realidad son objetos javascript), aunque es posible usar otros: xml, yaml, plist, etc
+</li>
+<li class="fragment roll-in">Recursos: Colecciones y vista detalle.
+</li>
+<li class="fragment roll-in"><i>clientes</i> -&gt; devuelve la lista de clientes
+</li>
+<li class="fragment roll-in"><i>clientes/1</i> -&gt; devuelve los datos del cliente1
+</li>
+<li class="fragment roll-in">Operaciones: Implementados sobre métodos HTTP
+<ul class="org-ul">
+<li>GET (consulta)
+</li>
+<li>POST (creación)
+</li>
+<li>PUT (modificación)
+</li>
+<li>DELETE (borrado)
+</li>
+</ul>
+</li>
+</ul>
+
+</section>
+<section id="sec-6-1" >
+
+<h3>Ejemplo</h3>
+<div class="org-src-container">
+
+<pre class="src src-javascript">[
+    {
+        <span style="color: #CC9393;">"id"</span>: 1,
+        <span style="color: #CC9393;">"nomruta"</span>: <span style="color: #CC9393;">"MURCIA"</span>,
+        <span style="color: #CC9393;">"ruta"</span>: <span style="color: #CC9393;">"       1"</span>
+    },
+    {
+        <span style="color: #CC9393;">"id"</span>: 2,
+        <span style="color: #CC9393;">"nomruta"</span>: <span style="color: #CC9393;">"LEVANTE"</span>,
+        <span style="color: #CC9393;">"ruta"</span>: <span style="color: #CC9393;">"       2"</span>
+    },
+    {
+        <span style="color: #CC9393;">"id"</span>: 3,
+        <span style="color: #CC9393;">"nomruta"</span>: <span style="color: #CC9393;">"CASTILLA-LAMANCHA"</span>,
+        <span style="color: #CC9393;">"ruta"</span>: <span style="color: #CC9393;">"       3"</span>
+    }
+]
+</pre>
+</div>
+</section>
+</section>
+<section>
+<section id="sec-7" >
+
+<h2>Angular JS</h2>
+<ul class="org-ul">
+<li><b><b>Hay otros</b></b>:
+<ul class="org-ul">
+<li>Backone: Mucha más bajo nivel.
+</li>
+<li>Ember: Más o menos a la par.
+</li>
+</ul>
+</li>
+
+<li>Pero, <b><b>AngularJS</b></b> tiene una gran comunidad y está por Google
+</li>
+</ul>
+
+</section>
+<section id="sec-7-1" >
+
+<h3>Características de AngularJS</h3>
+<ul class="org-ul">
+<li class="fragment roll-in">Módulos
+</li>
+<li class="fragment roll-in">Vistas
+</li>
+<li class="fragment roll-in">Directivas
+</li>
+<li class="fragment roll-in">Servicios
+</li>
+<li class="fragment roll-in">Filtros
+</li>
+<li class="fragment roll-in">Controladores
+</li>
+<li class="fragment roll-in">Data binding
+</li>
+<li class="fragment roll-in">Enrutamiento
+</li>
+<li class="fragment roll-in">Injección de dependencias
+</li>
+<li class="fragment roll-in">Código testeable
+</li>
+</ul>
+
+</section>
+<section id="sec-7-2" >
+
+<h3>Módulos</h3>
+<ul class="org-ul">
+<li>Unidades de código para agrupar funcionalidades
+</li>
+<li>Tiene dos básicamente dos métodos "config" y "run"
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-javascript">angular.module(<span style="color: #CC9393;">'miModulo'</span>, []).
+    config(<span style="color: #F0DFAF; font-weight: bold;">function</span>(<span style="color: #DFAF8F;">injectables</span>) { <span style="color: #5F7F5F;">// </span><span style="color: #7F9F7F;">provider-injector</span>
+     <span style="color: #5F7F5F;">// </span><span style="color: #7F9F7F;">Aqu&#237; se configura el m&#243;dulo</span>
+   }).
+     run(<span style="color: #F0DFAF; font-weight: bold;">function</span>(<span style="color: #DFAF8F;">injectables</span>) { <span style="color: #5F7F5F;">// </span><span style="color: #7F9F7F;">instance-injector</span>
+     <span style="color: #5F7F5F;">// </span><span style="color: #7F9F7F;">Este es el c&#243;digo de inicaci&#243;n</span>
+});
+</pre>
+</div>
+</section>
+<section id="sec-7-3" >
+
+<h3>Rutas</h3>
+<ul class="org-ul">
+<li>En la configuración del módulo podemos configurar nuestras rutas de la aplicación.
+</li>
+<li>Al cambiar la ruta, carga la plantilla en la directiva &lt;ng-view&gt; y le da el control al controlador asignado.
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-javascript">angular.module(<span style="color: #CC9393;">'miModulo'</span>, []).
+config(<span style="color: #F0DFAF; font-weight: bold;">function</span>(<span style="color: #DFAF8F;">$routeProvider</span>) {
+    $routeProvider
+            .when(<span style="color: #CC9393;">'/'</span>, {
+                templateUrl: <span style="color: #CC9393;">'main.html'</span>,
+                controller: <span style="color: #CC9393;">'MainCtrl'</span>
+            })
+            .when(<span style="color: #CC9393;">'/clientes'</span>, {
+                templateUrl: <span style="color: #CC9393;">'clientes.html'</span>,
+                controller: <span style="color: #CC9393;">'ClientesCtrl'</span>
+
+            })
+            .otherwise({redirectTo: <span style="color: #CC9393;">'/'</span>});
+   });
+</pre>
+</div>
+</section>
+<section id="sec-7-4" >
+
+<h3>Controladores</h3>
+<ul class="org-ul">
+<li>Son los que preparan los modelos de datos y dan vida a las vistas.
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-javascript"><span style="color: #F0DFAF; font-weight: bold;">function</span> <span style="color: #93E0E3;">MainCtrl</span>(<span style="color: #DFAF8F;">$scope</span>, <span style="color: #DFAF8F;">clientes</span>) {
+    $scope.texto = <span style="color: #CC9393;">'Bienvenido al &#225;rea de clientes'</span>;
+    $scope.templateMenuUrl = utils.tpl(<span style="color: #CC9393;">'ui/menu'</span>);
+    clientes.getList()
+        .then(<span style="color: #F0DFAF; font-weight: bold;">function</span>(<span style="color: #DFAF8F;">data</span>) {
+            $scope.clientes = data;
+        });
+
+    $scope.borrarCliente = <span style="color: #F0DFAF; font-weight: bold;">function</span>(<span style="color: #DFAF8F;">cliente</span>) {
+        clientes.remove({id: cliente.id });
+    }
+}
+
+angular.module(<span style="color: #CC9393;">'tvh.controllers.main'</span>, [])
+        .controller(<span style="color: #CC9393;">'MainCtrl'</span>, [ <span style="color: #CC9393;">'$scope'</span>, <span style="color: #CC9393;">'clientes'</span>, MainCtrl ]);
+</pre>
+</div>
+</section>
+<section id="sec-7-5" >
+
+<h3>Vistas</h3>
+<ul class="org-ul">
+<li>Son plantillas en html que son interpretadas por AngularJS
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-html">&lt;<span style="color: #93E0E3;">ng-include</span> <span style="color: #DFAF8F;">src</span>=<span style="color: #CC9393;">"templateMenuUrl"</span>&gt;&lt;/<span style="color: #93E0E3;">ng-include</span>&gt;
+&lt;<span style="color: #93E0E3;">h1</span>&gt;<span style="font-weight: bold; text-decoration: underline;">{{ texto }}</span>&lt;/<span style="color: #93E0E3;">h1</span>&gt;
+&lt;<span style="color: #93E0E3;">table</span> <span style="color: #DFAF8F;">class</span>=<span style="color: #CC9393;">"table table-striped"</span>&gt;
+    &lt;<span style="color: #93E0E3;">tr</span>&gt;
+        &lt;<span style="color: #93E0E3;">th</span>&gt;Nombre&lt;/<span style="color: #93E0E3;">th</span>&gt;
+        &lt;<span style="color: #93E0E3;">th</span>&gt;Provincia&lt;/<span style="color: #93E0E3;">th</span>&gt;
+        &lt;<span style="color: #93E0E3;">th</span>&gt;Direcci&#243;n&lt;/<span style="color: #93E0E3;">th</span>&gt;
+        &lt;<span style="color: #93E0E3;">th</span>&gt;Poblaci&#243;n&lt;/<span style="color: #93E0E3;">th</span>&gt;
+    &lt;/<span style="color: #93E0E3;">tr</span>&gt;
+    &lt;<span style="color: #93E0E3;">tr</span> <span style="color: #DFAF8F;">ng-repeat</span>=<span style="color: #CC9393;">"cliente in clientes"</span>&gt;
+        &lt;<span style="color: #93E0E3;">td</span>&gt;{{ cliente.titular }}&lt;/<span style="color: #93E0E3;">td</span>&gt;
+        &lt;<span style="color: #93E0E3;">td</span>&gt;{{ cliente.provincia }}&lt;/<span style="color: #93E0E3;">td</span>&gt;
+        &lt;<span style="color: #93E0E3;">td</span>&gt;{{ cliente.direccion }}&lt;/<span style="color: #93E0E3;">td</span>&gt;
+        &lt;<span style="color: #93E0E3;">td</span>&gt;{{ cliente.poblacion }}&lt;/<span style="color: #93E0E3;">td</span>&gt;
+    &lt;/<span style="color: #93E0E3;">tr</span>&gt;
+&lt;/<span style="color: #93E0E3;">table</span>&gt;
+</pre>
+</div>
+</section>
+<section id="sec-7-6" >
+
+<h3>Directivas</h3>
+<ul class="org-ul">
+<li class="fragment roll-in">Son etiquetas de html
+</li>
+<li class="fragment roll-in">Angular tiene las suyas
+<ul class="org-ul">
+<li>ng-click
+</li>
+<li>ng-href
+</li>
+<li>select
+</li>
+<li>input
+</li>
+<li>ng-repeat
+</li>
+<li>ng-view
+</li>
+<li>ng-template
+</li>
+<li>ng-switch
+</li>
+<li>ng-if
+</li>
+<li>Muchas más
+</li>
+</ul>
+</li>
+<li class="fragment roll-in">Además podemos crear las nuestras
+</li>
+</ul>
+</section>
+<section id="sec-7-7" >
+
+<h3>Directivas</h3>
+<ul class="org-ul">
+<li>Ejemplos de uso
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-html">&lt;<span style="color: #93E0E3;">div</span> <span style="color: #DFAF8F;">ng-repeat</span>=<span style="color: #CC9393;">"servicio in servicios | orderBy:'demora'"</span> <span style="color: #DFAF8F;">class</span>=<span style="color: #CC9393;">"servicio"</span>&gt;
+{{ servicio.matricula }} &#183;
+{{servicio.marca}} {{ servicio.modelo}} &#183;
+{{servicio.cliente}} &#183;
+&lt;/<span style="color: #93E0E3;">div</span>&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-html">&lt;<span style="color: #93E0E3;">td</span> <span style="color: #DFAF8F;">ng-show</span>=<span style="color: #CC9393;">"documento.tieneEcoraee()"</span>&gt;{{ documento.ecoraee|moneda }}&lt;/<span style="color: #93E0E3;">td</span>&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-html">&lt;<span style="color: #93E0E3;">ul</span>&gt;
+  &lt;<span style="color: #93E0E3;">li</span> <span style="color: #DFAF8F;">ng-repeat</span>=<span style="color: #CC9393;">"(porcentaje, iva) in documento.ivas"</span>&gt;
+    {{ iva|moneda }}
+     &lt;<span style="color: #93E0E3;">span</span> <span style="color: #DFAF8F;">class</span>=<span style="color: #CC9393;">"porcentaje"</span>&gt;({{ porcentaje }}%)&lt;/<span style="color: #93E0E3;">span</span>&gt;
+  &lt;/<span style="color: #93E0E3;">li</span>&gt;
+&lt;/<span style="color: #93E0E3;">ul</span>&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-html">&lt;<span style="color: #93E0E3;">td</span> <span style="color: #DFAF8F;">ng-show</span>=<span style="color: #CC9393;">"documento.tieneEcoraee()"</span>&gt;{{ documento.ecoraee|moneda }}&lt;/<span style="color: #93E0E3;">td</span>&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-html">&lt;<span style="color: #93E0E3;">pagination</span> <span style="color: #DFAF8F;">collection</span>=<span style="color: #CC9393;">"articulos"</span>&gt;&lt;/<span style="color: #93E0E3;">pagination</span>&gt;
+</pre>
+</div>
+</section>
+<section id="sec-7-8" >
+
+<h3>Directivas</h3>
+<ul class="org-ul">
+<li>Nos sirve para abstraer agrupando vistas/ controlador y modelo en una directiva.
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-javascript">angular.module(<span style="color: #CC9393;">'cliente'</span>, [])
+.directive(<span style="color: #CC9393;">'cliente'</span>, <span style="color: #F0DFAF; font-weight: bold;">function</span>() {
+    <span style="color: #F0DFAF; font-weight: bold;">return</span> {
+          restrict: <span style="color: #CC9393;">'E'</span>,
+          scope: { clienteInfo: <span style="color: #CC9393;">'=info'</span> },
+          templateUrl: <span style="color: #CC9393;">'cliente.html'</span>
+        };
+  });
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-html" id="cliente.html">Nombre: {{ cliente.nombre }}
+Direcci&#243;n: {{ cliente.direccion }}
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-html">&lt;<span style="color: #93E0E3;">cliente</span> <span style="color: #DFAF8F;">info</span>=<span style="color: #CC9393;">"datosDeCliente"</span>&gt;&lt;/<span style="color: #93E0E3;">cliente</span>&gt;
+</pre>
+</div>
+</section>
+<section id="sec-7-9" >
+
+<h3>Filtros</h3>
+<ul class="org-ul">
+<li>Modifican la presentación de los datos del modelo en la vista
+<ul class="org-ul">
+<li>Por ejemplo: Formateando valores, Filtrando listas, etc
+</li>
+</ul>
+</li>
+<li>Escalares:
+<ul class="org-ul">
+<li>number
+</li>
+<li>uppercase/lowercase
+</li>
+<li>date
+</li>
+<li>curreny
+</li>
+</ul>
+</li>
+<li>Arrays
+<ul class="org-ul">
+<li>orderBy
+</li>
+<li>limitTo
+</li>
+<li>filter
+</li>
+</ul>
+</li>
+</ul>
+
+<p>
+{{ expression | filter }}
+</p>
+</section>
+<section id="sec-7-10" >
+
+<h3>Filtros</h3>
+<div class="org-src-container">
+
+<pre class="src src-javascript">angular.module(<span style="color: #CC9393;">'filtros'</span>, [])
+.filter(<span style="color: #CC9393;">'moneda'</span>, <span style="color: #F0DFAF; font-weight: bold;">function</span>() {
+    <span style="color: #F0DFAF; font-weight: bold;">return</span> <span style="color: #F0DFAF; font-weight: bold;">function</span>(<span style="color: #DFAF8F;">item</span>) {
+        <span style="color: #F0DFAF; font-weight: bold;">return</span> oot.formatNumber(oot.toFloat(item))  + <span style="color: #CC9393;">"&#8364;"</span>;
+    };
+})
+.filter(<span style="color: #CC9393;">'sum'</span>, <span style="color: #F0DFAF; font-weight: bold;">function</span>() {
+      <span style="color: #F0DFAF; font-weight: bold;">return</span> <span style="color: #F0DFAF; font-weight: bold;">function</span>(<span style="color: #DFAF8F;">items</span>, <span style="color: #DFAF8F;">field</span>) {
+          <span style="color: #F0DFAF; font-weight: bold;">var</span> <span style="color: #DFAF8F;">total</span> = 0;
+          angular.forEach(items, <span style="color: #F0DFAF; font-weight: bold;">function</span>(<span style="color: #DFAF8F;">item</span>) {
+              <span style="color: #F0DFAF; font-weight: bold;">var</span> <span style="color: #DFAF8F;">num</span> = parseFloat(item[field]);
+              total += !isNaN(num) ? num:  0;
+          });
+          <span style="color: #F0DFAF; font-weight: bold;">return</span> total;
+      };
+  });
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-html">* {{ articulo.precio|moneda }}
+* {{ articulosList|sum:'precio'|moneda }}
+</pre>
+</div>
+</section>
+<section id="sec-7-11" >
+
+<h3>Servicios</h3>
+<ul class="org-ul">
+<li><b><b>Son objetos o funciones que realizan una tarea específica.</b></b>
+</li>
+<li>Se definen y quedan disponibles para que sean injectados por medio de la injección de dependencias
+</li>
+<li>Son singletons
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-javascript">angular.module(
+    <span style="color: #CC9393;">"tvh.services"</span>,
+    []
+).factory(<span style="color: #CC9393;">"clientes"</span>,
+    [<span style="color: #CC9393;">"Restangular"</span>,
+     <span style="color: #F0DFAF; font-weight: bold;">function</span>(<span style="color: #DFAF8F;">Restangular</span>) {
+      <span style="color: #F0DFAF; font-weight: bold;">return</span> Restangular.all(<span style="color: #CC9393;">"clientes"</span>);
+    }]
+);
+</pre>
+</div>
+</section>
+
+
+</section>
+<section>
+<section id="sec-8" >
+
+<h2>Módulos de terceros</h2>
+<ul class="org-ul">
+<li>Restangular: Para crear clientes Rest fácilmente.
+</li>
+<li>AngularUI: Directivas extra, bootstrap
+</li>
+<li>AngularGM: Directivas para controlar google Maps
+</li>
+<li>ngmodules.org
+</li>
+</ul>
+</section>
+</section>
+<section>
+<section id="sec-9" >
+
+<h2>Documentación y referencias</h2>
+<ul class="org-ul">
+<li><a href="http://www.angularjs.org">http://www.angularjs.org</a>
+</li>
+<li><a href="https://github.com/mgonto/restangular">https://github.com/mgonto/restangular</a>
+</li>
+<li><a href="http://sass-lang.com/">http://sass-lang.com/</a>
+</li>
+<li><a href="http://www.django-rest-framework.org/">http://www.django-rest-framework.org/</a>
+</li>
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js/lib/js/head.min.js"></script>
+<script src="./reveal.js/js/reveal.min.js"></script>
+<script>
+
+        		// Full list of configuration options available here:
+        		// https://github.com/hakimel/reveal.js#configuration
+        		Reveal.initialize({
+        			controls: true,
+        			progress: true,
+        			history: true,
+        			center: true,
+        			rollingLinks: false,
+        			keyboard: true,
+        			overview: true,
+        			 // slide width
+        			 // slide height
+        			 // slide margin
+        			 // slide minimum scaling factor
+        			 // slide maximum scaling factor
+
+
+        			theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        			transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        			transitionSpeed: 'default',
+
+        			// Optional libraries used to extend on reveal.js
+        			dependencies: [
+        				{ src: './reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } }
+        				,{ src: './reveal.js/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
+        				,{ src: './reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
+        				,{ src: './reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        				,{ src: './reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }
+        				,{ src: './reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        				// { src: './reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+        				// { src: './reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+
+        			]
+        		});
+</script>
+</body>
+</html>

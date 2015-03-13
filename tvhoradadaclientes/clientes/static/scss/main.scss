@@ -1,0 +1,113 @@
+@import 'assets/stylesheets/bootstrap';
+
+
+body {
+    background: white;
+}
+
+a.logo {
+    width: 60%;
+    display: block;
+    margin: 5% auto;
+}
+
+.header .nav {
+    margin-top: 2em;
+}
+h3.logo {
+    margin: 0;
+    overflow: hidden;
+    a.logo {
+        width: auto;
+        margin: 0;
+    }
+    img {
+        max-width: 90%;
+    }
+}
+
+div.login-wrapper {
+    margin: 5% auto;
+    max-width: 300px;
+    .logo {
+        margin-bottom: 1em;
+    }
+}
+
+.btn-primary:hover, .btn-primary, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #FF0000;
+    border-color: #FF0000;
+}
+
+div.alert {
+    margin-bottom: 0;
+    padding: 0;
+    height: 0;
+
+    &.in {
+        margin: 1em 0;
+        padding: 1em;
+        height: auto;
+    }
+}
+/* Remove colors and add transition property */
+.alert-flash {
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 20px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid transparent;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+
+    /* change transition property to all */
+    -webkit-transition-property: all;
+    transition-property: all;
+}
+
+.alert-flash h4 {
+    margin: 0;
+}
+
+.alert-flash .close {
+    position: relative;
+    top: -2px;
+    right: -21px;
+    line-height: 20px;
+}
+
+/* add warning colors to warn class */
+.alert-warn {
+    background-color: #fcf8e3;
+    border: 1px solid #fbeed5;
+}
+
+.alert-warn,
+.alert-warn h4 {
+    color: #c09853;
+}
+th {
+    text-align: center;
+}
+.numero {
+    text-align: right;
+}
+
+.well[ui-view]{
+    height: 65px;
+}
+
+.ui-view-container {
+    position: relative;
+}
+
+@import "animations/angular";
+@import "animaciones";
+
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+    text-align: center;
+}

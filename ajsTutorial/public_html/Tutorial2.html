@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="es" ng-app="tutorialApp">
+    <head>
+        <title>AngularJS Tutorial 2</title>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="js/libs/angular.js/angular.js"></script>
+        <script type="text/javascript" src="js/ControlListaTelefonos.js"></script>
+    </head>
+    <body ng-controller="ControlListaTelefonos">
+        <ul>
+            <li ng-repeat="telefono in telefonos">
+                {{telefono.nombre}}
+                <p>{{telefono.descripcion}}</p>
+            </li>
+        </ul>
+        <p>Número total de tel&eacute;fonos: {{telefonos.length}}</p>
+        <p>¡Hola {{mundo}}!</p>
+        <table>
+            <tr><th>row number</th></tr>
+            <tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7]"><td>{{i + 1}}</td></tr>
+        </table>
+    </body>
+</html>

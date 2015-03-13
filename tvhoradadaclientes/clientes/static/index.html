@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="tvh">
+    <head>
+        <title>
+            Área de clientes - TvHoradada
+        </title>
+        <link href="./bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="./css/main.css" rel="stylesheet" type="text/css" />
+        <meta charset="utf-8"/>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class="active"><a href="/logout">Salir</a></li>
+                </ul>
+
+                <h3 class="text-muted">
+                    <a href="./" class="logo"><img src="./images/logo grupo.jpg" /></a>
+                </h3>
+            </div>
+            <div>
+                <ng-view></ng-view>
+
+
+                <div class="footer">
+                    <p>&copy; TvHoradada 2014</p>
+                </div>
+
+            </div>
+            <script>
+                var tpl_root = './views/';
+            </script>
+            <script   type="text/javascript" src="./bower_components/jquery/jquery.js" charset="utf-8"></script>
+            <script   type="text/javascript" src="./bower_components/lodash/dist/lodash.js" charset="utf-8"></script>
+            <script   type="text/javascript" src="./bower_components/bootstrap/dist/js/bootstrap.js" charset="utf-8"></script>
+            <script   type="text/javascript" src="./bower_components/angular/angular.js" charset="utf-8"></script>
+            <script   type="text/javascript" src="./bower_components/angular-route/angular-route.js" charset="utf-8"></script>
+            <script   type="text/javascript" src="./bower_components/restangular/src/restangular.js" charset="utf-8"></script>
+            <script   type="text/javascript" src="./js/utils.js" charset="utf-8"></script>
+            <script   type="text/javascript" src="./js/app.js" charset="utf-8"></script>
+            <script   type="text/javascript" src="./js/services.js" charset="utf-8"></script>
+            <script   type="text/javascript" src="./js/controllers/main.js" charset="utf-8"></script>
+
+    </body>
+</html>

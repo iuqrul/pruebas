@@ -1,0 +1,3 @@
+[submodule "exemples"]
+	path = exemples
+	url = git://github.com/cliffmeyers/blog-examples.git

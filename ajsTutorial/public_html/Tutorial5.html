@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="phonecatControllers" ng-controller="PhoneListCtrl">
+    <head>
+        <title ng-bind-template="AngularJS Tutorial 5">AngularJS Tutorial 5</title>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="js/libs/angular.js/angular.js"></script>
+        <script type="text/javascript" src="js/PhoneListCtrl.js"></script>
+    </head>
+    <body>
+        Búsqueda: <input ng-model="query">
+        Ordenar por:
+        <select ng-model="orderProp">
+            <option value="name">Alfab&eacute;tico</option>
+            <option value="age">Más reciente</option>
+            <option value="-age">Más antiguo</option>
+        </select>
+        <ul class="phones">
+            <li ng-repeat="phone in phones| filter:query | orderBy:orderProp">
+                {{phone.name}}
+                <p>{{phone.snippet}}</p>
+            </li>
+        </ul>
+        {{phones | json}}
+    </body>
+</html>

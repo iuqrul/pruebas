@@ -1,0 +1,375 @@
+#+Title: Programación Frontend en JavaScript
+#+Author: José Sánchez Moreno
+#+Email: jose@o2w.es
+
+#+OPTIONS: toc:nil reveal_history:t reveal_control:t reveal_progress:t reveal_overview:t num:nil
+#+REVEAL_THEME: night
+#+REVEAL_EXTRA_CSS: frontend.css
+
+* Iniciación al desarrollo de frontends en javascript
+
+- Básicamente veremos como desarrollar en javascript usando como backend para los datos servidores REST.
+
+
+* Herramientas que usaremos
+#+ATTR_REVEAL: :frag roll-in
+- **Git** para el control de código
+- **Sass** para la generación de estilos css
+- **Python / Django** para la creación del servidor rest
+- **AngularJS** como plataforma de desarrollo javascript
+
+
+
+
+* Git: Gitlab
+
+- La encontraremos en https://git.o2w.es
+- Lo básico:
+- Descargamos el código con "git pull"
+- Modificamos lo que queramos y después
+- Realizamos un commit "git commit -am 'Descripción de los cambios'"
+- Subimos los cambios con "git push"
+
+** Interfaz de colaboración
+[[./gitlab.png]]
+
+
+* Sass
+- Es un metalenguage sobre css que nos permite generar código css de manera más eficiente, fácil y ponente.
+- Usaremos compass específicamente sobre sass
+** Código sass
+#+BEGIN_SRC css
+    .navbar .container-fluid.main-nav .nav-collapse .nav.menubar {
+        p {
+            @include respond-to(mobile) {
+                display: inline-block;
+            }
+        }
+
+    }
+  #+END_SRC
+
+- El Resultado "transpilado"
+
+
+#+BEGIN_SRC css
+
+    @media only screen and (max-width: 640px) {
+      /* line 38, ../scss/dondeestamigrua.scss */
+      .navbar .container-fluid.main-nav .nav-collapse .nav.menubar p {
+        display: inline-block;
+      }
+    }
+#+END_SRC
+
+
+* Python y django
+
+- Django nos permite crear servidores REST de manera muy rápida, potente y sencilla.
+#+BEGIN_SRC python
+
+  class FacturasViewSet(viewsets.GenericViewSet):
+
+      def retrieve(self, request, pk=None):
+          result = Tvh().get_factura(pk)
+          return Response(result)
+
+      @link()
+      def lineas(self, request, pk=None):
+          result = Tvh().get_lineas_de_factura(pk)
+          return Response(result)
+
+      @link()
+      def consumos(self, request, pk=None):
+          result = Tvh().get_consumos_de_factura(pk)
+          return Response(result)
+
+
+    class StockalmViewSet(BaseView):
+       model = models.Stockalm
+       serializer_class = serializers.StockalmSerializer
+
+#+END_SRC
+
+** API
+[[./api.png]]
+
+
+* Rest
+#+ATTR_REVEAL: :frag roll-in
+- Nos permite interactuar con los modelos de datos
+- Descentralizado: los datos pueden estar en varios servidores
+- Sencillo: basado en javascript (en realidad son objetos javascript), aunque es posible usar otros: xml, yaml, plist, etc
+- Recursos: Colecciones y vista detalle.
+- /clientes/ -> devuelve la lista de clientes
+- /clientes/1/ -> devuelve los datos del cliente1
+- Operaciones: Implementados sobre métodos HTTP
+  - GET (consulta)
+  - POST (creación)
+  - PUT (modificación)
+  - DELETE (borrado)
+
+** Ejemplo
+#+BEGIN_SRC javascript
+[
+	{
+		"id": 1,
+		"nomruta": "MURCIA",
+		"ruta": "       1"
+	},
+	{
+		"id": 2,
+		"nomruta": "LEVANTE",
+		"ruta": "       2"
+	},
+	{
+		"id": 3,
+		"nomruta": "CASTILLA-LAMANCHA",
+		"ruta": "       3"
+	}
+]
+
+#+END_SRC
+
+* Angular JS
+
+- **Hay otros**:
+  + Backone: Mucha más bajo nivel.
+  + Ember: Más o menos a la par.
+
+- Pero, **AngularJS** tiene una gran comunidad y está por Google
+
+** Características de AngularJS
+#+ATTR_REVEAL: :frag roll-in
+- Módulos
+- Vistas
+- Directivas
+- Servicios
+- Filtros
+- Controladores
+- Data binding
+- Enrutamiento
+- Injección de dependencias
+- Código testeable
+
+
+** Módulos
+- Unidades de código para agrupar funcionalidades
+- Tiene dos básicamente dos métodos "config" y "run"
+#+BEGIN_SRC javascript
+  angular.module('miModulo', []).
+      config(function(injectables) { // provider-injector
+       // Aquí se configura el módulo
+     }).
+       run(function(injectables) { // instance-injector
+       // Este es el código de inicación
+  });
+#+END_SRC
+
+** Rutas
+- En la configuración del módulo podemos configurar nuestras rutas de la aplicación.
+- Al cambiar la ruta, carga la plantilla en la directiva <ng-view> y le da el control al controlador asignado.
+#+BEGIN_SRC javascript
+    angular.module('miModulo', []).
+    config(function($routeProvider) {
+        $routeProvider
+                .when('/', {
+                    templateUrl: 'main.html',
+                    controller: 'MainCtrl'
+                })
+                .when('/clientes', {
+                    templateUrl: 'clientes.html',
+                    controller: 'ClientesCtrl'
+
+                })
+                .otherwise({redirectTo: '/'});
+       });
+
+#+END_SRC
+
+** Controladores
+- Son los que preparan los modelos de datos y dan vida a las vistas.
+
+#+BEGIN_SRC javascript
+  function MainCtrl($scope, clientes) {
+      $scope.texto = 'Bienvenido al área de clientes';
+      $scope.templateMenuUrl = utils.tpl('ui/menu');
+      clientes.getList()
+          .then(function(data) {
+              $scope.clientes = data;
+          });
+
+      $scope.borrarCliente = function(cliente) {
+          clientes.remove({id: cliente.id });
+      }
+  }
+
+  angular.module('tvh.controllers.main', [])
+          .controller('MainCtrl', [ '$scope', 'clientes', MainCtrl ]);
+
+#+END_SRC
+
+** Vistas
+- Son plantillas en html que son interpretadas por AngularJS
+#+BEGIN_SRC html
+<ng-include src="templateMenuUrl"></ng-include>
+<h1>{{ texto }}</h1>
+<table class="table table-striped">
+    <tr>
+        <th>Nombre</th>
+        <th>Provincia</th>
+        <th>Dirección</th>
+		<th>Población</th>
+    </tr>
+    <tr ng-repeat="cliente in clientes">
+        <td>{{ cliente.titular }}</td>
+        <td>{{ cliente.provincia }}</td>
+        <td>{{ cliente.direccion }}</td>
+		<td>{{ cliente.poblacion }}</td>
+    </tr>
+</table>
+
+#+END_SRC
+
+** Directivas
+#+ATTR_REVEAL: :frag roll-in
+- Son etiquetas de html
+- Angular tiene las suyas
+  - ng-click
+  - ng-href
+  - select
+  - input
+  - ng-repeat
+  - ng-view
+  - ng-template
+  - ng-switch
+  - ng-if
+  - Muchas más
+- Además podemos crear las nuestras
+
+** Directivas
+- Ejemplos de uso
+#+BEGIN_SRC html
+  <div ng-repeat="servicio in servicios | orderBy:'demora'" class="servicio">
+  {{ servicio.matricula }} ·
+  {{servicio.marca}} {{ servicio.modelo}} ·
+  {{servicio.cliente}} ·
+  </div>
+#+END_SRC
+
+#+BEGIN_SRC html
+  <td ng-show="documento.tieneEcoraee()">{{ documento.ecoraee|moneda }}</td>
+#+END_SRC
+
+#+BEGIN_SRC html
+<ul>
+  <li ng-repeat="(porcentaje, iva) in documento.ivas">
+    {{ iva|moneda }}
+     <span class="porcentaje">({{ porcentaje }}%)</span>
+  </li>
+</ul>
+#+END_SRC
+
+#+BEGIN_SRC html
+  <td ng-show="documento.tieneEcoraee()">{{ documento.ecoraee|moneda }}</td>
+#+END_SRC
+
+#+BEGIN_SRC html
+    <pagination collection="articulos"></pagination>
+#+END_SRC
+
+** Directivas
+- Nos sirve para abstraer agrupando vistas/ controlador y modelo en una directiva.
+
+#+BEGIN_SRC javascript
+  angular.module('cliente', [])
+  .directive('cliente', function() {
+      return {
+            restrict: 'E',
+            scope: { clienteInfo: '=info' },
+            templateUrl: 'cliente.html'
+          };
+    });
+#+END_SRC
+
+#+NAME: cliente.html
+#+BEGIN_SRC html
+  Nombre: {{ cliente.nombre }}
+  Dirección: {{ cliente.direccion }}
+#+END_SRC
+
+#+BEGIN_SRC html
+<cliente info="datosDeCliente"></cliente>
+#+END_SRC
+
+** Filtros
+- Modifican la presentación de los datos del modelo en la vista
+  - Por ejemplo: Formateando valores, Filtrando listas, etc
+- Escalares:
+  - number
+  - uppercase/lowercase
+  - date
+  - curreny
+- Arrays
+  - orderBy
+  - limitTo
+  - filter
+
+{{ expression | filter }}
+
+** Filtros
+
+#+BEGIN_SRC javascript
+  angular.module('filtros', [])
+  .filter('moneda', function() {
+      return function(item) {
+          return oot.formatNumber(oot.toFloat(item))  + "€";
+      };
+  })
+  .filter('sum', function() {
+        return function(items, field) {
+            var total = 0;
+            angular.forEach(items, function(item) {
+                var num = parseFloat(item[field]);
+                total += !isNaN(num) ? num:  0;
+            });
+            return total;
+        };
+    });
+#+END_SRC
+#+BEGIN_SRC html
+  * {{ articulo.precio|moneda }}
+  * {{ articulosList|sum:'precio'|moneda }}
+#+END_SRC
+
+** Servicios
+- **Son objetos o funciones que realizan una tarea específica.**
+- Se definen y quedan disponibles para que sean injectados por medio de la injección de dependencias
+- Son singletons
+
+#+BEGIN_SRC javascript
+angular.module(
+    "tvh.services",
+    []
+).factory("clientes",
+    ["Restangular",
+     function(Restangular) {
+      return Restangular.all("clientes");
+    }]
+);
+
+#+END_SRC
+
+
+
+* Módulos de terceros
+- Restangular: Para crear clientes Rest fácilmente.
+- AngularUI: Directivas extra, bootstrap
+- AngularGM: Directivas para controlar google Maps
+- ngmodules.org
+
+* Documentación y referencias
+- http://www.angularjs.org
+- https://github.com/mgonto/restangular
+- http://sass-lang.com/
+- http://www.django-rest-framework.org/

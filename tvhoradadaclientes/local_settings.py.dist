@@ -1,0 +1,12 @@
+from trueip.settings import *
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'trueip',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+    },
+
+}

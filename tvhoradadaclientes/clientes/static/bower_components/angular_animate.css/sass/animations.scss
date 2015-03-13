@@ -1,0 +1,37 @@
+@import "compass/css3";
+@import "animate.scss/scss/animate";
+
+
+@mixin ang_anim ($anim, $anim_out){
+	.#{$anim}{
+		color: blue;
+	}
+	.#{$anim}.ng-hide-add, .#{$anim}.ng-hide-remove {
+		display:block!important;
+	}
+	.#{$anim}.ng-enter, 
+	.#{$anim}.ng-leave { 
+		-webkit-transition: all 0.5s;
+		transition: all 0.5s;
+	}
+	.#{$anim}.ng-enter.#{$anim}.ng-enter-active,
+	.#{$anim}.ng-hide,
+	.#{$anim}.ng-leave {
+		@include animation-name($anim);
+	}
+
+	.#{$anim}.ng-hide-add,
+	.#{$anim}.ng-enter {
+		@include animation-name($anim_out);
+	}	
+}
+
+@include ang_anim(roll-in, roll-out);
+@include ang_anim(fold-in, fold-out);
+@include ang_anim(flip-x-in, flip-x-out);
+@include ang_anim(flip-y-in, flip-y-out);
+@include ang_anim(rotate-in, rotate-out);
+@include ang_anim(fade-in, fade-out);
+@include ang_anim(grow-in, grow-out);
+@include ang_anim(shrink-in, shrink-out);
+@include ang_anim(swing, swing);
